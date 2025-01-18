@@ -1,0 +1,48 @@
+﻿@model PagedList.IPagedList<LeHungCuong_2122110266.Context.Brand>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Quản lý thương hiệu</h2>
+
+<p>
+    @Html.ActionLink("Thêm Thương hiệu", "Create", null, new { @class = "btn btn-primary" })
+</p>
+@using (Html.BeginForm("Index", "Brand", FormMethod.Get))
+{
+    <p>
+        Tìm tên thương hiệu: @Html.TextBox("Search", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
+<div id="brandList">
+    @Html.Partial("_BrandList", Model)
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Xử lý tìm kiếm bằng AJAX
+    $("#searchForm").on("submit", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var query = $("#Search").val();
+
+        $.get(url, { Search: query }, function (data) {
+            $("#brandList").html(data);
+        });
+    });
+
+    // Xử lý phân trang bằng AJAX
+    $(document).on("click", ".pagination a", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+
+        $.get(url, function (data) {
+            $("#brandList").html(data);
+        });
+    });
+</script>

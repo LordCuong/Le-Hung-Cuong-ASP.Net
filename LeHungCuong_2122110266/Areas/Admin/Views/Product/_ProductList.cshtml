@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<LeHungCuong_2122110266.Context.Product>
+@using PagedList
+@using PagedList.Mvc
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Name)</th>
+        <th style="width:200px">@Html.DisplayNameFor(model => model.FirstOrDefault().Image)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().CategoryId)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().BrandId)</th>
+
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().ShortDes)</th>
+        <th style="width:200px">@Html.DisplayNameFor(model => model.FirstOrDefault().FullDescription)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().ShowOnHomePage)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Price)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().PriceDiscount)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().CreatedAt)</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().UpdatedAt)</th>
+
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>
+                <img src="@Url.Content("~/content/images/items/" + item.Image)" alt="Product Image" class="img-thumbnail" style="width: 200px;">
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
+            <td>@Html.DisplayFor(modelItem => item.BrandId)</td>
+            <td>@Html.DisplayFor(modelItem => item.ShortDes)</td>
+            <td>@Html.DisplayFor(modelItem => item.FullDescription)</td>
+            <td>@Html.DisplayFor(modelItem => item.ShowOnHomePage)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>@Html.DisplayFor(modelItem => item.PriceDiscount)</td>
+            <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+            <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<nav aria-label="Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(Model.PageNumber - 1)" aria-label="Previous">
+                    &laquo; Trước
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">&laquo; Trước</span>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            if (i == Model.PageNumber)
+            {
+                <li class="page-item active">
+                    <span class="page-link">@i</span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(Model.PageNumber + 1)" aria-label="Next">
+                    Tiếp &raquo;
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">Tiếp &raquo;</span>
+            </li>
+        }
+    </ul>
+</nav>

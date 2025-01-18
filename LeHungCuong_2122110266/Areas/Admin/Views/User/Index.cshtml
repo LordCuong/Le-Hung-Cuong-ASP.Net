@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<LeHungCuong_2122110266.Context.User>
+@using PagedList.Mvc
+@using PagedList
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Người Dùng</h2>
+
+
+@using (Html.BeginForm("Index", "User", FormMethod.Get))
+{
+    <p>
+        Tìm người dùng: @Html.TextBox("Search", ViewBag.CurrentFilter as string, new { @placeholder = "lưu ý chỉ tìm Email" })
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+
+<div id="userList">
+    @Html.Partial("_UserList", Model)
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Xử lý tìm kiếm bằng AJAX
+    $("#searchForm").on("submit", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var query = $("#Search").val();
+
+        $.get(url, { Search: query }, function (data) {
+            $("#userList").html(data);
+        });
+    });
+
+    // Xử lý phân trang bằng AJAX
+    $(document).on("click", ".pagination a", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+
+        $.get(url, function (data) {
+            $("#userList").html(data);
+        });
+    });
+</script>

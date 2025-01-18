@@ -1,0 +1,86 @@
+﻿@model LeHungCuong_2122110266.Context.Category
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 class="text-danger">Xóa danh mục</h2>
+
+<div class="alert alert-warning">
+    <h4><i class="fas fa-exclamation-triangle"></i> Bạn có muốn xóa danh mục này?</h4>
+</div>
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h5>Chi tiết</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd class="col-sm-9">
+                <img src="@Url.Content("~/Content/images/items/" + Model.Image)" alt="Category Image" class="img-thumbnail" style="max-width: 150px;" />
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Slug)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Slug)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.ShowOnHomePage)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ShowOnHomePage)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.DisplayOrder)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.DisplayOrder)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    @using (Html.BeginForm("Delete", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> xác nhận xóa
+            </button>
+            <a href="@Url.Action("Index", "Category")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> quay về
+            </a>
+        </div>
+    }
+</div>

@@ -1,0 +1,55 @@
+﻿@model LeHungCuong_2122110266.Context.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết</h2>
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Người dùng</h3>
+        </div>
+        <div class="card-body">
+            <h4 class="text-muted">Chi tiết người dùng</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Họ</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.FirstName)</dd>
+                        <dt class="col-sm-4">tên</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.LastName)</dd>
+
+                    </dl>
+                </div>
+
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+                </div>
+            </div>
+
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Mật Khẩu</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Password)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-3">Phân Quyền</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.IsAdmin)</dd>
+            </dl>
+            <dl class="row">
+                <dt class="col-sm-3">Ngày Tạo</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CreatedAt)</dd>
+            </dl>
+
+
+        </div>
+        <div class="card-footer text-end">
+            @Html.ActionLink("Quay về", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

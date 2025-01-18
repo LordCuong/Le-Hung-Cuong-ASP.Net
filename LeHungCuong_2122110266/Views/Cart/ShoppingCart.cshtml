@@ -1,0 +1,192 @@
+﻿@model IEnumerable<LeHungCuong_2122110266.Models.CartModel>
+@{
+    ViewBag.Title = "ShoppingCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Cập nhật số lượng sản phẩm
+        $(".update-quantity").on("change", function () {
+            var productId = $(this).data("id");
+            var quantity = $(this).val();
+
+            if (quantity <= 0) {
+                alert("Số lượng phải lớn hơn 0!");
+                $(this).val(1);
+                return;
+            }
+
+            var model = {
+                Id: productId,
+                Quantity: quantity
+            };
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UpdateQuantity", "Cart")',
+                data: JSON.stringify(model),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.success) {
+                        $('#totalPrice').text(data.totalPrice.toLocaleString('vi-VN') + ' VNĐ');
+                    } else {
+                        alert("Lỗi khi cập nhật số lượng!");
+                    }
+                },
+                error: function () {
+                    alert("Lỗi khi cập nhật số lượng!");
+                }
+            });
+        });
+
+        // Xóa sản phẩm khỏi giỏ hàng
+        $(".remove-cart-item").on("click", function () {
+            var productId = $(this).data("id");
+
+            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?")) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Remove", "Cart")',
+                    data: JSON.stringify({ Id: productId }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data.success) {
+                            $("#product-" + productId).remove();
+                            $('#totalPrice').text(data.totalPrice.toLocaleString('vi-VN') + ' VNĐ');
+                        } else {
+                            alert("Lỗi khi xóa sản phẩm!");
+                        }
+                    },
+                    error: function () {
+                        alert("Lỗi khi xóa sản phẩm!");
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col" width="120">Số lượng</th>
+                                <th scope="col" width="120">Giá</th>
+                                <th scope="col" class="text-right" width="200"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr id="product-@item.Product.Id">
+                                        <td>
+                                            <figure class="itemside">
+                                                <div class="aside">
+                                                    <img src="~/Content/images/items/@item.Product.Image" class="img-sm">
+                                                </div>
+                                                <figcaption class="info">
+                                                    <a href="#" class="title text-dark">@item.Product.ShortDes</a>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            <input type="number"
+                                                   class="form-control update-quantity"
+                                                   value="@item.Quantity"
+                                                   data-id="@item.Product.Id"
+                                                   min="1" />
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <var class="price">
+                                                    @if (item.Product.TypeId == 1)
+                                                    {
+                                                        @item.Product.PriceDiscount
+                                                    }
+                                                    else
+                                                    {
+                                                        @item.Product.Price
+                                                    }
+                                                </var>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <button class="btn btn-light remove-cart-item" data-id="@item.Product.Id">Xóa</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <p>Giỏ hàng hiện tại không có sản phẩm</p>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href="@Url.Action("Index", "Payment")" class="btn btn-primary float-md-right">Thanh toán <i class="fa fa-chevron-right"></i></a>
+                        <a href="@Url.Action("Category", "Category")" class="btn btn-light"><i class="fa fa-chevron-left"></i> Tiếp tục mua sắm</a>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        @if (Model != null && Model.Any())
+                        {
+                            decimal totalPrice = Model.Sum(item =>
+                            {
+                                decimal price = item.Product.TypeId == 1 ?
+                                    (decimal)(item.Product.PriceDiscount ?? 0) :
+                                    (decimal)item.Product.Price;
+                                return price * item.Quantity;
+                            });
+
+                            <dl class="dlist-align">
+                                <dt>Tổng giá:</dt>
+                                <dd class="text-right" id="totalPrice">@totalPrice.ToString("N0") VNĐ</dd>
+                            </dl>
+                        }
+                        else
+                        {
+                            <p>Giỏ hàng của bạn hiện đang rỗng.</p>
+                        }
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+<section class="section-name border-top padding-y">
+    <div class="container">
+        <h6>Chính sách thanh toán và hoàn tiền</h6>
+        <p>
+            Điều rất quan trọng là khách hàng phải chú ý đến việc hấp thụ của khách hàng, nhưng thực tế là như vậy
+            theo thời gian chúng xảy ra như một cơn chuyển dạ và đau đớn lớn lao. Để hiện lên trong tâm trí tôi,
+            Ai nên thực hành bất kỳ loại công việc nào ngoại trừ việc được hưởng lợi từ nó theo một cách nào đó?
+            kết quả Nghi ngờ hay đau đớn khi bị khiển trách trong niềm vui muốn được
+            đừng để tóc chạy trốn nỗi đau Ngoại trừ việc họ không bị dục vọng làm mờ mắt
+            họ xuất gia, họ có lỗi khi bỏ bê nhiệm vụ của mình;
+        </p>
+        <p>
+            Việc có một bệnh nhân là rất quan trọng và sau đó sẽ là một quá trình hấp thụ mỡ, nhưng tôi sẽ làm như vậy
+            theo thời gian chúng xảy ra như một cơn chuyển dạ và đau đớn lớn lao. Để hiện lên trong tâm trí tôi,
+            không ai nên thực hành bất kỳ loại công việc nào ngoại trừ việc đạt được một số lợi ích từ nó
+            kết quả Nghi ngờ hay đau đớn khi bị khiển trách trong niềm vui muốn được
+            đừng để tóc chạy trốn nỗi đau Ngoại trừ việc họ không bị dục vọng làm mờ mắt
+            họ xuất gia, họ có lỗi khi bỏ bê nhiệm vụ của mình;
+        </p>
+
+    </div><!-- container // -->
+</section>

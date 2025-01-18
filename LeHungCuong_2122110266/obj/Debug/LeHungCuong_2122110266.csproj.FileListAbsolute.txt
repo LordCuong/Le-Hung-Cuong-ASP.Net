@@ -51,6 +51,8 @@ E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\rosly
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\roslyn\VBCSCompiler.exe
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\roslyn\VBCSCompiler.exe.config
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\Antlr3.Runtime.dll
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\EntityFramework.dll
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\EntityFramework.SqlServer.dll
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\Microsoft.Web.Infrastructure.dll
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\Newtonsoft.Json.dll
@@ -62,6 +64,8 @@ E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\Syste
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\System.Web.WebPages.dll
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\System.Web.WebPages.Razor.dll
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\WebGrease.dll
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\EntityFramework.xml
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\EntityFramework.SqlServer.xml
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\System.Web.Helpers.xml
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\System.Web.Mvc.xml
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\System.Web.Optimization.xml
@@ -77,3 +81,7 @@ E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\obj\Debug
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\obj\Debug\LeHungCu.5301C1D3.Up2Date
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\obj\Debug\LeHungCuong_2122110266.dll
 E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\obj\Debug\LeHungCuong_2122110266.pdb
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\PagedList.dll
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\PagedList.Mvc.dll
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\PagedList.xml
+E:\tailieuhoctap\asp.net\LeHungCuong_2122110266\LeHungCuong_2122110266\bin\PagedList.Mvc.xml

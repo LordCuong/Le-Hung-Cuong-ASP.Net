@@ -1,0 +1,121 @@
+﻿@model LeHungCuong_2122110266.Context.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="text-center mb-4">Chỉnh sữa sản phẩm</h2>
+
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title">Chỉnh sữa</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.CreatedAt)
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Name)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Image)</label>
+                    <div class="col-md-9">
+                        <!-- Hiển thị hình ảnh hiện tại -->
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <img src="~/Content/images/items/@Model.Image" alt="Current Image" class="img-thumbnail" style="max-width: 200px;" />
+                        }
+                        <input type="file" name="ImageUpLoad" class="form-control mt-2" />
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.CategoryId)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.BrandId)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.BrandId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.ShortDes)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.ShortDes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShortDes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.FullDescription)</label>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.FullDescription, new { @class = "form-control", rows = 4 })
+                        @Html.ValidationMessageFor(model => model.FullDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Price)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.PriceDiscount)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.PriceDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PriceDiscount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Checkbox Inputs -->
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Deleted)</label>
+                    <div class="col-md-9">
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.Deleted)
+                            @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.ShowOnHomePage)</label>
+                    <div class="col-md-9">
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.ShowOnHomePage)
+                            @Html.ValidationMessageFor(model => model.ShowOnHomePage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-md-9 offset-md-3">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        @Html.ActionLink("Quay về", "Index", null, new { @class = "btn btn-secondary ms-2" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

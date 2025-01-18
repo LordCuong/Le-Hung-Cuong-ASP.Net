@@ -1,0 +1,58 @@
+﻿@model OrderDetailViewModel
+@using LeHungCuong_2122110266.Models
+@{
+    ViewBag.Title = "Chi Tiết Đơn Hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-primary">Chi Tiết Đơn Hàng</h2>
+
+<div class="card mb-4">
+    <div class="card-header bg-info text-white">
+        <h3>Thông Tin Đơn Hàng</h3>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 font-weight-bold">Tên Đơn Hàng</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Order.Name)</dd>
+
+            <dt class="col-sm-3 font-weight-bold">Ngày Tạo</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Order.CreatedAt)</dd>
+
+            <dt class="col-sm-3 font-weight-bold">Trạng Thái</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Order.Status)</dd>
+
+            <dt class="col-sm-3 font-weight-bold">Người Dùng</dt>
+            <dd class="col-sm-9">@Html.DisplayFor(model => model.Order.UserId)</dd>
+        </dl>
+    </div>
+</div>
+
+<h3 class="text-center text-success">Chi Tiết Sản Phẩm</h3>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id Sản Phẩm</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+            <th>Tổng Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var detail in Model.OrderDetail)
+        {
+            <tr>
+                <td>@detail.ProductId</td>
+                <td>@detail.Quantity</td>
+                <td>@detail.Price</td>
+                <td>@(detail.Quantity * detail.Price)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <a href="@Url.Action("Index", "Order")" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Quay lại danh sách đơn hàng
+    </a>
+</div>

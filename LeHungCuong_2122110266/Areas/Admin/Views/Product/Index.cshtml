@@ -1,0 +1,44 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<LeHungCuong_2122110266.Context.Product>
+
+<h2>Quản lý sản phẩm</h2>
+
+<p>
+    @Html.ActionLink("Thêm sản phẩm", "Create", null, new { @class = "btn btn-primary" })
+</p>
+@using (Html.BeginForm("Index", "Product", FormMethod.Get, new { id = "searchForm" }))
+{
+    <p>
+        Tìm tên sản phẩm: @Html.TextBox("Search", ViewBag.CurrentFilter as string, new { id = "searchBox" })
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+<div id="productList">
+    @Html.Partial("_ProductList", Model)
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Xử lý tìm kiếm bằng AJAX
+    $("#searchForm").on("submit", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var query = $("#searchBox").val();
+
+        $.get(url, { Search: query }, function (data) {
+            $("#productList").html(data);
+        });
+    });
+
+    // Xử lý phân trang bằng AJAX
+    $(document).on("click", ".pagination a", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+
+        $.get(url, function (data) {
+            $("#productList").html(data);
+        });
+    });
+</script>

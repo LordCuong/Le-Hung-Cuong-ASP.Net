@@ -1,0 +1,79 @@
+﻿@model LeHungCuong_2122110266.Context.Brand
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2 class="text-center mb-4">Chỉnh sửa</h2>
+
+@using (Html.BeginForm("Edit", "Brand", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title">chi tiết</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.CreatedAt)
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Name)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Image)</label>
+                    <div class="col-md-9">
+                        <!-- Hiển thị hình ảnh hiện tại -->
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <img src="~/Content/images/items/" alt="Current Image" class="img-thumbnail" style="max-width: 200px;" />
+                        }
+                        <input type="file" name="ImageUpload" class="form-control mt-2" />
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*<div class="row mb-3">
+            <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.Slug)</label>
+            <div class="col-md-9">
+                @Html.EditorFor(model => model.Slug, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Slug, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+                <!-- Checkbox Inputs -->
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.ShowOnHomePage)</label>
+                    <div class="col-md-9">
+                        <div class="form-check">
+                            @Html.EditorFor(model => model.ShowOnHomePage)
+                            @Html.ValidationMessageFor(model => model.ShowOnHomePage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-md-3 col-form-label">@Html.LabelFor(model => model.DisplayOrder)</label>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DisplayOrder, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DisplayOrder, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-md-9 offset-md-3">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                        @Html.ActionLink("QUay về", "Index", null, new { @class = "btn btn-secondary ms-2" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

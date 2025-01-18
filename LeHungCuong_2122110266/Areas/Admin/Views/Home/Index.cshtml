@@ -1,0 +1,150 @@
+﻿@{
+    ViewBag.Title = "Admin Dashboard";
+}
+
+<!-- Content Header -->
+<div class="content-header py-4 bg-primary text-white shadow">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="m-0">Admin Dashboard</h1>
+                <p class="text-light">Manage your website efficiently with powerful tools.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <ol class="breadcrumb bg-transparent p-0 mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="~/Admin/Home/Index" class="text-white">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Dashboard</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Quick Links -->
+
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-box fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Sản phẩm</h5>
+                    <p class="card-text">thêm, sửa, xóa.</p>
+                    <a href="~/Admin/Product/Index" class="btn btn-success">
+                        <i class="fas fa-arrow-right"></i> đến sản phẩm
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-box fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Thương Hiệu</h5>
+                    <p class="card-text">thêm, sửa, xóa.</p>
+                    <a href="~/Admin/Brand/Index" class="btn btn-warning">
+                        <i class="fas fa-arrow-right"></i> đến thương thiệu
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-box fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Danh mục</h5>
+                    <p class="card-text">thêm, sửa, xóa.</p>
+                    <a href="~/Admin/Category/Index" class="btn btn-warning">
+                        <i class="fas fa-arrow-right"></i>đến danh mục
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Người dùng</h5>
+                    <p class="card-text">thêm, sửa, xóa.</p>
+                    <a href="~/Admin/User/Index" class="btn btn-primary">
+                        <i class="fas fa-arrow-right"></i> đến người dùng
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <i class="fas fa-file-invoice-dollar fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">đơn hàng</h5>
+                    <p class="card-text">thay đổi trạng thái đơn.</p>
+                    <a href="~/Admin/Order/Index" class="btn btn-warning text-white">
+                        <i class="fas fa-arrow-right"></i> đến đơn hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Section -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="card-title mb-0">Monthly Revenue</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="card-title mb-0">New Users</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="usersChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctxRevenue, {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [{
+                label: 'Revenue ($)',
+                data: [12000, 15000, 17000, 14000, 19000],
+                borderColor: '#17a2b8',
+                fill: false
+            }]
+        }
+    });
+
+    const ctxUsers = document.getElementById('usersChart').getContext('2d');
+    new Chart(ctxUsers, {
+        type: 'bar',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [{
+                label: 'New Users',
+                data: [200, 300, 250, 400, 350],
+                backgroundColor: '#dc3545'
+            }]
+        }
+    });
+</script>

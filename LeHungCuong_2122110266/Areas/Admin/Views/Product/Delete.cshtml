@@ -1,0 +1,80 @@
+﻿@model LeHungCuong_2122110266.Context.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 class="text-danger">Xóa sản phẩm</h2>
+
+<div class="alert alert-warning">
+    <h4><i class="fas fa-exclamation-triangle"></i> bạn có chắc muốn xóa sản phẩm này?</h4>
+    <p>This action cannot be undone.</p>
+</div>
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h5>Product Details</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd class="col-sm-9">
+                <img src="@Url.Content("~/Content/images/items/" + Model.Image)" alt="Product Image" class="img-thumbnail" style="max-width: 150px;" />
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CategoryId)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.ShortDes)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.ShortDes)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Price) $
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    @using (Html.BeginForm("Delete", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> xóa
+            </button>
+            <a href="@Url.Action("Index", "Product")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Quay về
+            </a>
+        </div>
+    }
+</div>

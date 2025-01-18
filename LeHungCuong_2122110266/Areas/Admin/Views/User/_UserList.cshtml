@@ -1,0 +1,105 @@
+﻿
+@model PagedList.IPagedList<LeHungCuong_2122110266.Context.User>
+@using PagedList.Mvc
+@using PagedList
+<table class="table">
+    <tr>
+        <th>
+            Họ
+        </th>
+        <th>
+            tên
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+        </th>
+        <th>
+            mật khẩu
+        </th>
+        <th>
+           quyền
+        </th>
+        <th>
+ngày tạo
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAdmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<nav aria-label="Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(Model.PageNumber - 1)" aria-label="Previous">
+                    &laquo; Trước
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">&laquo; Trước</span>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            if (i == Model.PageNumber)
+            {
+                <li class="page-item active">
+                    <span class="page-link">@i</span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(Model.PageNumber + 1)" aria-label="Next">
+                    Tiếp &raquo;
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">Tiếp &raquo;</span>
+            </li>
+        }
+    </ul>
+</nav>

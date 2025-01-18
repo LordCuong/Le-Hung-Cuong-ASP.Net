@@ -1,0 +1,103 @@
+﻿
+@model PagedList.IPagedList<LeHungCuong_2122110266.Context.Order>
+@using PagedList.Mvc
+@using PagedList
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Quản lý đơn hàng</h2>
+
+@using (Html.BeginForm("Index", "Order", FormMethod.Get))
+{
+    <p>
+        Tìm đơn hàng: @Html.TextBox("Search", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Tìm kiếm" />
+    </p>
+    @*<script>
+            $(document).ready(function () {
+    // Kiểm tra nếu có thông báo thành công hoặc lỗi
+    $(".change-status").change(function () {
+        var orderId = $(this).data("id");
+        var newStatus = $(this).val();
+
+        $.ajax({
+            url: '@Url.Action("UpdateStatus", "Order")',
+            type: 'POST',
+            data: {
+                id: orderId,
+                status: newStatus
+            },
+            success: function (response) {
+                if (response.success) {
+                    toastr.success("Cập nhật trạng thái thành công!");
+                } else {
+                    toastr.error("Cập nhật trạng thái thất bại. Vui lòng thử lại.");
+                }
+            },
+            error: function () {
+                toastr.error("Đã xảy ra lỗi. Vui lòng thử lại.");
+            }
+        });
+    });
+});
+
+    </script>*@
+}
+
+
+<div id="orderList">
+    @Html.Partial("_OrderList", Model)
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Xử lý tìm kiếm bằng AJAX
+    $("#searchForm").on("submit", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("action");
+        var query = $("#Search").val();
+
+        $.get(url, { Search: query }, function (data) {
+            $("#orderList").html(data);
+        });
+    });
+
+    // Xử lý phân trang bằng AJAX
+    $(document).on("click", ".pagination a", function (e) {
+        e.preventDefault();
+        var url = $(this).attr("href");
+
+        $.get(url, function (data) {
+            $("#orderList").html(data);
+        });
+    });
+    $(document).ready(function () {
+    // Kiểm tra nếu có thông báo thành công hoặc lỗi
+    $(".change-status").change(function () {
+        var orderId = $(this).data("id");
+        var newStatus = $(this).val();
+
+        $.ajax({
+            url: '@Url.Action("UpdateStatus", "Order")',
+            type: 'POST',
+            data: {
+                id: orderId,
+                status: newStatus
+            },
+            success: function (response) {
+                if (response.success) {
+                    toastr.success("Cập nhật trạng thái thành công!");
+                } else {
+                    toastr.error("Cập nhật trạng thái thất bại. Vui lòng thử lại.");
+                }
+            },
+            error: function () {
+                toastr.error("Đã xảy ra lỗi. Vui lòng thử lại.");
+            }
+        });
+    });
+});
+</script>
+

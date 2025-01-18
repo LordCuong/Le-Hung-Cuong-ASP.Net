@@ -1,0 +1,60 @@
+﻿@model LeHungCuong_2122110266.Context.Brand
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0"> danh mục</h3>
+        </div>
+        <div class="card-body">
+            <h4 class="text-muted">CHi tiết thương hiệu</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Tên</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+                        <dt class="col-sm-4">ảnh</dt>
+                        <dd class="col-sm-8">
+                            <img src="@Url.Content("~/Content/images/items/" + Model.Image)" alt="Category Avatar" class="img-fluid rounded" />
+                        </dd>
+
+                        <dt class="col-sm-4">Slug</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Slug)</dd>
+                    </dl>
+                </div>
+
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Hiển thị</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.ShowOnHomePage)</dd>
+
+                        <dt class="col-sm-4">Display Order</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.DisplayOrder)</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <h4 class="text-muted mt-4">thông tin thêm</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">xóa</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Deleted)</dd>
+
+                <dt class="col-sm-3">Ngày tạo</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.CreatedAt)</dd>
+
+                <dt class="col-sm-3"> ngày cập nhật</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.UpdatedAt)</dd>
+            </dl>
+        </div>
+        <div class="card-footer text-end">
+            @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary me-2" })
+            @Html.ActionLink("quay về", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    </div>
+</div>

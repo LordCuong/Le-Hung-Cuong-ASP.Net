@@ -1,0 +1,90 @@
+﻿
+@model PagedList.IPagedList<LeHungCuong_2122110266.Context.Order>
+@using PagedList
+@using PagedList.Mvc
+
+<table class="table">
+    <tr>
+        <th>Tên đơn hàng</th>
+        <th>@Html.DisplayNameFor(model => model.FirstOrDefault().UserId)</th>
+        <th>Giá</th>
+        <th> trạng thái đơn hàng</th>
+        <th>Ngày tạo</th>
+        <th>Ngày cập nhật</th>
+
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>
+                <select class="form-control change-status" data-id="@item.Id">
+                    <option value="0" @(item.Status == 0 ? "selected" : "")>Giao hàng thất bại</option>
+                    <option value="1" @(item.Status == 1 ? "selected" : "")>Đang chờ xử lý</option>
+                    <option value="2" @(item.Status == 2 ? "selected" : "")>Đã xác nhận</option>
+                    <option value="3" @(item.Status == 3 ? "selected" : "")>Đang vận chuyển</option>
+                    <option value="4" @(item.Status == 4 ? "selected" : "")>Giao hàng thành công</option>
+                </select>
+            </td>            <td>@Html.DisplayFor(modelItem => item.CreatedAt)</td>
+            <td>@Html.DisplayFor(modelItem => item.UpdatedAt)</td>
+            <td>
+                @Html.ActionLink("Chi Tiết", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+<nav aria-label="Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(Model.PageNumber - 1)" aria-label="Previous">
+                    &laquo; Trước
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">&laquo; Trước</span>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            if (i == Model.PageNumber)
+            {
+                <li class="page-item active">
+                    <span class="page-link">@i</span>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link" href="?page=@i">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(Model.PageNumber + 1)" aria-label="Next">
+                    Tiếp &raquo;
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">Tiếp &raquo;</span>
+            </li>
+        }
+    </ul>
+</nav>

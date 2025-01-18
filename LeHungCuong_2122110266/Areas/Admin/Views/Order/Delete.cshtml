@@ -1,0 +1,82 @@
+﻿@model LeHungCuong_2122110266.Context.Order
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2 class="text-danger">Xóa đơn hàng</h2>
+
+<div class="alert alert-warning">
+    <h4><i class="fas fa-exclamation-triangle"></i> Bạn có chắc chắn xóa đơn hàng này?</h4>
+    <p>This action cannot be undone.</p>
+</div>
+
+<div class="card">
+    <div class="card-header bg-danger text-white">
+        <h5>chi tiết</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.UserId)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.CreatedAt)
+            </dd>
+
+            <dt class="col-sm-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    @using (Html.BeginForm("Delete", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>Xác nhận
+            </button>
+            <a href="@Url.Action("Index", "Order")" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> quay về
+            </a>
+        </div>
+    }
+</div>
+
